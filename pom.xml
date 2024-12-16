@@ -23,8 +23,8 @@
 
 		<!-- DEPENDENCIES VERSION -->
 		<jdk.version>17</jdk.version>
-		<cds.services.version>2.10.1</cds.services.version>
-		<cloud.sdk.version>5.10.0</cloud.sdk.version>
+		<cds.services.version>3.4.0</cds.services.version>
+		<cloud.sdk.version>5.12.0</cloud.sdk.version>
 		<xsuaa.version>3.5.0</xsuaa.version>
 		<cf-java-logging-support.version>3.8.3</cf-java-logging-support.version>
 		<cds.install-cdsdk.version>7.9.3</cds.install-cdsdk.version>
@@ -45,6 +45,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
 
 			<!-- CLOUD SDK -->
 			<dependency>
