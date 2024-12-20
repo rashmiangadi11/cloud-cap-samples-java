@@ -57,6 +57,23 @@
 			<artifactId>cds-feature-change-tracking</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+ <dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-collections4</artifactId>
+    <version>4.4</version> <!-- Use the appropriate version -->
+</dependency>
+<!-- For SaaSRegistry Dependency -->
+<dependency>
+    <groupId>com.sap.cds</groupId>
+    <artifactId>cds-feature-mt</artifactId>
+    <version>3.4.0</version>
+</dependency>
+
+<dependency>
+    <groupId>com.sap.cds</groupId>
+    <artifactId>sdm</artifactId>
+    <version>1.1.0-SNAPSHOT</version>
+</dependency>
 
 		<dependency>
 			<groupId>com.sap.cds</groupId>
