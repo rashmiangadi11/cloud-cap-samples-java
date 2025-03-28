@@ -25,6 +25,7 @@ class DependencyExit implements EventHandler {
     public void onGetDependencies(DependenciesEventContext context) {
 
         List<SaasRegistryDependency> dependencies = new ArrayList<>();
+        @SuppressWarnings("unchecked")
         Map<String, Object> uaa = (Map<String, Object>) getSDMCredentials().get("uaa");
         dependencies.add(SaasRegistryDependency.create(uaa.get("xsappname").toString()));
         context.setResult(dependencies);

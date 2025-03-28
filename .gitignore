@@ -6,7 +6,7 @@ default-env.json
 openapi.json
 .env
 .values.yaml
-
+package-lock.json
 bin/
 target/
 .java-version
@@ -20,7 +20,7 @@ target/
 
 node/
 node_modules/
-
+*._json_backup
 .mta/
 *.mtar
 mta.yaml
@@ -29,7 +29,7 @@ mta.yaml
 gc_history*
 hs_err*
 .DS_Store
-
+*.mta
 *.db
 *.sqlite*
 
