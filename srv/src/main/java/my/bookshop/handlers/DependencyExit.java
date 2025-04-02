@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sap.cds.Struct;
 import com.sap.cds.sdm.model.Repository;
-import com.sap.cds.sdm.service.RepoService;
-import com.sap.cds.sdm.service.RepoServiceImpl;
 import com.sap.cds.services.handler.EventHandler;
 import com.sap.cds.services.handler.annotations.After;
 import com.sap.cds.services.handler.annotations.On;
@@ -81,19 +79,4 @@ String response = sdmAdminService.onboardRepository(repository);
 System.out.println("Onboard response "+response);
     }
 
-    @After(event = DeploymentService.EVENT_UNSUBSCRIBE)
-public void afterUnsubscribe(UnsubscribeEventContext context) {
-    //delete onboarded repository
-    System.out.println("After unsubscribing to my CAP application");
-        final SaasRegistrySubscriptionOptions options = Struct
-       .access(context.getOptions())
-       .as(SaasRegistrySubscriptionOptions.class);
-// Access the specific property
-final String subdomain = options.getSubscribedSubdomain();
-System.out.println("subdomain "+subdomain);
-
-RepoService repoService =  new RepoServiceImpl();
-String res = repoService.offboardRepository(subdomain);
-System.out.println(res);
-}
 }
