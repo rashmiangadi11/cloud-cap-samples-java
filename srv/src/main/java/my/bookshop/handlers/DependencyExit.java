@@ -45,23 +45,40 @@ return  sdmBinding.getCredentials();
     @After(event = DeploymentService.EVENT_SUBSCRIBE)
     public void onSubscribe(SubscribeEventContext context) throws JsonProcessingException,UnsupportedEncodingException {
     //use httpclient and onboard a repository
-       System.out.println("After subscribing to my CAP application");
+        System.out.println("After subscribing to my CAP application");
          final SaasRegistrySubscriptionOptions options = Struct
                     .access(context.getOptions())
                     .as(SaasRegistrySubscriptionOptions.class);
 
             // Access the specific property
             final String subdomain = options.getSubscribedSubdomain();
- System.out.println("subdomain "+subdomain);
-RepoService repoService =  new RepoServiceImpl();
+SDMAdminService sdmAdminService =  new SDMAdminServiceImpl();
+
 Repository repository = new Repository();
 repository.setDescription("Onboarding Repo Demo");
 repository.setDisplayName(" Test Onboarding repo");
 repository.setExternalId(System.getenv("REPOSITORY_ID"));
 repository.setSubdomain(subdomain);
-repository.setTenantId(context.getTenant());
-String response = repoService.onboardRepository(repository);
-System.out.println("response"+response);
+repository.setHashAlgorithms("SHA-256");
+repository.setIsEncryptionEnabled(false);
+repository.setIsVirusScanEnabled(true);
+List<RepositoryParams> repositoryParams = new ArrayList<>();
+RepositoryParams repositoryParam = new RepositoryParams();
+      repositoryParam.setParamName("fileExtensions");
+      JsonObject fileExtensionsValue = new JsonObject();
+      fileExtensionsValue.addProperty("type", "block");
+      fileExtensionsValue.add(
+          "list", new Gson().toJsonTree(new String[] {"docx","pptx"}));
+
+      // Convert the nested JSON object to a JSON string
+      String jsonParamValue = fileExtensionsValue.toString();
+      repositoryParam.setParamValue(jsonParamValue);
+      repositoryParams.add(repositoryParam);
+      repository.setRepositoryParams(repositoryParams);
+      System.out.println("Repo Param "+repositoryParams);
+      System.out.println("Repo  "+repository);
+String response = sdmAdminService.onboardRepository(repository);
+System.out.println("Onboard response "+response);
     }
 
     @After(event = DeploymentService.EVENT_UNSUBSCRIBE)
