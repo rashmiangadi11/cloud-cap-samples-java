@@ -33,6 +33,7 @@ entity HarmonizedDocuments : cuid, managed {
   hdmRelations: Association to many HDMRelations on hdmRelations.harmonizedDocument = $self;
   typeObject: Association to one TypeObject on typeObject.harmonizedDocument = $self;
   typeObjectData: Association to one TypeObjectData on typeObjectData.harmonizedDocument = $self;
+  versions : Composition of many DocumentVersion on versions.document = $self;
 
 }
 
@@ -129,4 +130,19 @@ entity TypePropertyData : cuid, managed {
   modifiedBy: String(255) @mandatory;
   typeObjectData: Association to one TypeObjectData on typeObjectDataID = typeObjectData.ID;
   typeProperty: Association to one TypeProperty on typePropertyID = typeProperty.ID;
+}
+
+@cds.persistence.persistent
+entity DocumentVersion: cuid, managed {
+  key document: Association to HarmonizedDocuments;
+  key versionNumber: String(256);
+  versionLabel: String(256);
+  versionDescription: String(4500);
+  versionCreatedBy: String(256);
+  versionCreationDate: DateTime;
+  versionLastModificationDate: DateTime;
+  versionLastModifiedBy: String(256);
+  versionIsLatestVersion: Boolean;
+  versionIsMajorVersion: Boolean;
+  versionChangeToken: String(256);
 }
