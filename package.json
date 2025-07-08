@@ -1,0 +1,20 @@
+{
+  "name": "bookshop",
+  "version": "1.0.0",
+  "dependencies": {
+    "@sap/cds": "^4",
+    "@sap/hana-client": "^2",
+    "@sap/xsenv": "^3"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "model": "db",
+        "[production]": {
+          "kind": "hana"
+        }
+      }
+    }
+  }
+}

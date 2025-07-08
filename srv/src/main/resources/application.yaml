@@ -65,7 +65,13 @@ cds:
       destination:
         properties:
           url: "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap"
-
+---
+spring:
+  datasource:
+    url: ${vcap.services.bookshop_mt_hana.credentials.url}
+    username: ${vcap.services.bookshop_mt_hana.credentials.user}
+    password: ${vcap.services.bookshop_mt_hana.credentials.password}
+    driver-class-name: com.sap.db.jdbc.Driver
 ---
 spring:
   config.activate.on-profile: destination

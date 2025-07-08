@@ -79,7 +79,7 @@ class AdminServiceHandler implements EventHandler {
 	}
 
 	/**
-	 * Validate correctness of an order before finishing the order proces:
+	 * Validate correctness of an order before finishing the order process:
 	 * 1. Check Order quantity for each Item and return a message if quantity is empty or <= 0
 	 * 2. Check Order quantity for each Item is available, return message if the stock is too low
 	 *
@@ -109,7 +109,6 @@ class AdminServiceHandler implements EventHandler {
 					}
 
 					// calculate the actual quantity difference
-					// FIXME this should handle book changes, currently only quantity changes are handled
 					int diffQuantity = quantity - db.run(Select.from(Bookshop_.ORDER_ITEMS).columns(i -> i.quantity()).byId(orderItem.getId()))
 												.first(OrderItems.class).map(i -> i.getQuantity()).orElse(0);
 
